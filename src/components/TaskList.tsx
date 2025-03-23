@@ -4,10 +4,13 @@ import {FaPen, FaTrash} from 'react-icons/fa'
 import { ITask } from '../interfaces/Task'
 
 type Props = {
-    taskList: ITask[]
+    taskList: ITask[],
+    handleDelete(id: number): void,
+    handleModal(): void,
+    handleEdit(task: ITask): void
 }
 
-const TaskList = ({taskList}: Props) => {
+const TaskList = ({taskList, handleDelete, handleModal, handleEdit}: Props) => {
   return (
     <>
     {taskList.length > 0 ? (
@@ -17,8 +20,8 @@ const TaskList = ({taskList}: Props) => {
                 <p className='text-sm font-semibold pt-1'>Descrição:</p>
                 <p className='overflow-hidden text-center text-sm px-2 h-3/4'>{task.description}</p>
                 <div className='flex justify-around w-full items-end h-2/3 md:items-center'>
-                    <button className='bg-amber-400 w-12 h-12 rounded-2xl flex justify-center items-center cursor-pointer hover:scale-115'><FaPen/></button>
-                    <button className='bg-red-600 w-12 h-12 rounded-2xl flex justify-center items-center cursor-pointer hover:scale-115'><FaTrash/></button>
+                    <button onClick={() => {handleModal(); handleEdit(task)}} className='bg-amber-400 w-12 h-12 rounded-2xl flex justify-center items-center cursor-pointer hover:scale-115'><FaPen/></button>
+                    <button onClick={() => {handleDelete(task.id)}} className='bg-red-600 w-12 h-12 rounded-2xl flex justify-center items-center cursor-pointer hover:scale-115'><FaTrash/></button>
                 </div>
             </div>
         ))

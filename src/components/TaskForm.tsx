@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 
 //interface
 import { ITask } from '../interfaces/Task'
@@ -6,10 +6,12 @@ import { ITask } from '../interfaces/Task'
 type Props = {
     btnText: string,
     setTaskList?: React.Dispatch<React.SetStateAction<ITask[]>>,
-    taskList: ITask[]
+    taskList: ITask[],
+    task?: ITask | null,
+    handleUpdate?(id: number, title: string, description: string): void
 }
 
-const TaskForm = ({btnText, setTaskList, taskList}: Props) => {
+const TaskForm = ({btnText, setTaskList, taskList, task, handleUpdate}: Props) => {
 
     const [id, setId] = useState<number>(0)
     const [title, setTitle] = useState<string>('')
@@ -29,7 +31,11 @@ const TaskForm = ({btnText, setTaskList, taskList}: Props) => {
     const addTaskHandle = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        // cria um id aleatório
+        if(handleUpdate) {
+            handleUpdate(id, title, description)
+
+        } else{
+            // cria um id aleatório
         const id = Math.floor(Math.random() * 1000)
 
         const newTask: ITask = {id, title, description}
@@ -37,7 +43,16 @@ const TaskForm = ({btnText, setTaskList, taskList}: Props) => {
         setTaskList!([...taskList, newTask])
         setTitle('')
         setDescription('')
+        }
     }
+
+    useEffect(() =>{
+        if(task){
+            setId(task.id)
+            setTitle(task.title)
+            setDescription(task.description)
+        }
+    }, [task])
 
   return (
     <div className='w-full flex justify-center items-center h-52 my-4'>
