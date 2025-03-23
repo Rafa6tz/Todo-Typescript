@@ -37,8 +37,6 @@ const TaskForm = ({btnText, setTaskList, taskList}: Props) => {
         setTaskList!([...taskList, newTask])
         setTitle('')
         setDescription('')
-
-        console.log(taskList)
     }
 
   return (

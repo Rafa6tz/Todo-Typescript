@@ -3,6 +3,7 @@ import TaskForm from "./components/TaskForm"
 
 //interface
 import { ITask } from "./interfaces/Task"
+import TaskList from "./components/TaskList"
 
 function App() {
 
@@ -14,6 +15,9 @@ function App() {
         <h2 className="font-bold text-2xl">Todo Typescript</h2>
       </header>
       <TaskForm btnText="Cadastrar tarefa" taskList={taskList} setTaskList={setTaskList}/>
+      <div className="w-full flex flex-col justify-center items-center">
+      <TaskList taskList={taskList}/>
+      </div>
     </>
   )
 }
