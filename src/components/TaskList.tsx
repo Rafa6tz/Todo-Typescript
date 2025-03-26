@@ -15,7 +15,7 @@ const TaskList = ({taskList, handleDelete, handleModal, handleEdit}: Props) => {
     <>
     {taskList.length > 0 ? (
         taskList.map((task) => (
-            <div key={task.id} className='bg-slate-200 m-2 rounded-2xl w-4/5 flex flex-col items-center h-50 md:h-42 md:w-2/4 p-2'>
+            <div key={task.id} className='bg-slate-200 shadow-lg m-2 rounded-2xl w-4/5 flex flex-col items-center h-50 md:h-42 md:w-2/4 p-2'>
                 <p className='font-bold text-2xl mt-1'>{task.title}</p>
                 <p className='text-sm font-semibold pt-1'>Descrição:</p>
                 <p className='overflow-hidden text-center text-sm px-2 h-3/4'>{task.description}</p>
